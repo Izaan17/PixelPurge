@@ -21,6 +21,12 @@ class DirectoryListBox(customtkinter.CTkFrame):
         self.directory_buttons_frame = customtkinter.CTkFrame(self, fg_color='transparent')
         self.directory_buttons_frame.pack(fill='x', padx=0, pady=10)
 
+        # Select all button
+        self.select_all_button = customtkinter.CTkButton(
+            self.directory_buttons_frame, text='Select All', width=50, fg_color='#636363', hover_color='#3b3b3b',
+            image=load_image('icons/folder.png'), command=self.select_all
+        )
+        self.select_all_button.pack(side='left', padx=(0, 10))
 
         self.delete_directory_button = customtkinter.CTkButton(
             self.directory_buttons_frame, text='Delete', width=50, fg_color='#636363', hover_color='#3b3b3b',
@@ -30,6 +36,9 @@ class DirectoryListBox(customtkinter.CTkFrame):
 
         self.list_box = tkinter.Listbox(self, selectmode='multiple')
         self.list_box.pack(fill='both', expand=True)
+
+    def select_all(self):
+        self.list_box.selection_set(0, 'end')
 
     def delete(self):
         # reverse to prevent shifting
