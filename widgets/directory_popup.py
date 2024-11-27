@@ -10,17 +10,19 @@ from utils.loader import load_image
 
 class DirectoryPopup(customtkinter.CTkToplevel):
     """
-    Popup for selecting and adding a directory with an optional recursive flag.
+    Popup for selecting and adding or editing a directory with an optional recursive flag.
     """
 
-    def __init__(self, parent, on_add_callback):
+    def __init__(self, parent, on_add_callback, directory=None, recursive=False):
         """
-        Initializes the popup.
+        Initializes the popup for either adding or editing a directory.
 
         Args:
             parent: The parent window.
             on_add_callback: Callback to invoke when the "Add" button is pressed,
                              passing the selected directory and recursive state.
+            directory: The directory to pre-populate if editing (default is None).
+            recursive: The recursive state to pre-populate if editing (default is False).
         """
         super().__init__(parent)
         self.on_add_callback = on_add_callback
@@ -28,13 +30,13 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         # Set up modal behavior
         self.transient(parent)
         self.grab_set()
-        self.title("Add Directory")
+        self.title("Add Directory" if directory is None else "Edit Directory")
         self.minsize(500, 200)
         self.resizable(False, False)
 
         # Input variables
-        self.directory_var = customtkinter.StringVar()
-        self.recursive_var = customtkinter.BooleanVar(value=False)
+        self.directory_var = customtkinter.StringVar(value=directory or "")
+        self.recursive_var = customtkinter.BooleanVar(value=recursive)
 
         # UI Components
         self.create_widgets()
@@ -46,13 +48,11 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         file_widgets_frame = customtkinter.CTkFrame(self, fg_color='transparent')
         file_widgets_frame.pack()
 
-
         # Entry for directory
         directory_entry = customtkinter.CTkEntry(file_widgets_frame,
                                                  width=400,
                                                  textvariable=self.directory_var)
         directory_entry.pack(pady=10, padx=10, side='left')
-
 
         # Button to open file dialog
         file_selector_button = DirectoryButton(
@@ -89,14 +89,14 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         )
         cancel_button.pack(side='left', padx=(5, 20))
 
-        # Add button
-        add_button = DirectoryButton(
+        # Add/Save button
+        action_button = DirectoryButton(
             button_frame,
-            text='Add',
+            text='Save' if self.directory_var.get() else 'Add',
             command=self.handle_add,
             width=140
         )
-        add_button.pack(side='left', padx=(20, 5))
+        action_button.pack(side='left', padx=(20, 5))
 
     def open_directory_selector(self):
         """
@@ -124,3 +124,4 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         # Pass the directory and recursive option to the callback
         self.on_add_callback(directory, recursive)
         self.destroy()
+
