@@ -2,16 +2,18 @@ import json
 import os.path
 import tkinter as tk
 from tkinter import messagebox, ttk
+
 import customtkinter
+
+import constants
 from utils.loader import load_image
 from widgets.directory_popup import DirectoryPopup
-import constants
+
 
 class DirectoryListTreeBox(customtkinter.CTkFrame):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
         self.directories_metadata = {}  # Stores metadata for each directory
-
 
         # Buttons Frame
         self.directory_buttons_frame = customtkinter.CTkFrame(self, fg_color='transparent')
@@ -22,6 +24,12 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
             hover_color='#3b3b3b', image=load_image('icons/add_folder.png'), command=self.make_directory
         )
         self.add_directory_button.pack(side='left')
+
+        self.add_default_directories_button = customtkinter.CTkButton(
+            self.directory_buttons_frame, text='Add default directories', width=50, fg_color='#636363',
+            hover_color='#3b3b3b', image=load_image('icons/add_folder.png'), command=self.add_default_directories
+        )
+        self.add_default_directories_button.pack(side='left', padx=(10, 0))
 
         self.delete_directory_button = customtkinter.CTkButton(
             self.directory_buttons_frame, text='Delete', width=50, fg_color='#636363', hover_color='#3b3b3b',
@@ -48,6 +56,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         """
         Opens a popup to allow the user to add a directory with a recursive option.
         """
+
         def on_add(directory, recursive):
             """
             Callback for when a directory is added.
@@ -70,6 +79,10 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         self.directories_metadata[directory] = metadata
         self.tree.insert('', 'end', text=directory, values=(directory, metadata['recursive']))
         self.save()
+
+    def add_default_directories(self):
+        for directory in constants.DEFAULT_DIRECTORIES:
+            self.add_directory(directory, {'recursive': True})
 
     def delete_directory(self):
         selected_item = self.tree.selection()
