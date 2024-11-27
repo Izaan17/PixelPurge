@@ -32,18 +32,19 @@ class PixelPurge(customtkinter.CTk):
         self.directory_tree_view = DirectoryListTreeBox(self.directory_info_frame, fg_color='transparent')
         self.directory_tree_view.pack(side='left', fill="both", expand=True, padx=10, pady=10)
 
-        self.directory_results_list_box = DirectoryListBox(self.directory_info_frame, self.pixel_watcher, self.output_panel, fg_color='transparent')
+        self.directory_results_list_box = DirectoryListBox(self.directory_info_frame, self.pixel_watcher,
+                                                           self.output_panel, fg_color='transparent')
         self.directory_results_list_box.pack(side='right', fill="both", expand=True, padx=10, pady=10)
 
         # Load saved directories on startup
         self.directory_tree_view.load()
-
 
         self.output_panel.pack(padx=20, pady=(10, 10), fill='x')
 
         # Controls Panel
         self.controls_panel = ControlPanel(self, self.directory_tree_view, self.output_panel, self.pixel_watcher)
         self.controls_panel.pack(side='left', pady=(0, 10), padx=20)
+
 
 if __name__ == '__main__':
     app = PixelPurge()
