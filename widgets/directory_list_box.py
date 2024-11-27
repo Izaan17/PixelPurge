@@ -54,11 +54,10 @@ class DirectoryListBox(customtkinter.CTkFrame):
             directory = self.list_box.get(selection)
             try:
                 shutil.rmtree(directory)
-                self.list_box.delete(selection)
                 self.output_panel.insert('end', f'Deleted {directory}')
             except Exception as error:
                 self.output_panel.insert('end', f'Failed to delete "{directory}": {error}')
-
+            self.list_box.delete(selection)
     def on_created(self, event):
         if event.is_directory:
             self.list_box.insert('end', f"{event.src_path}")
