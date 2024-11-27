@@ -2,6 +2,7 @@ import customtkinter
 from watcher import PixelMonitor, PixelWatcher
 from widgets.directory_list_tree_box import DirectoryListTreeBox
 from widgets.output_panel import OutputPanel
+from widgets.buttons.toggle_button import ToggleButton
 
 class ControlPanel(customtkinter.CTkFrame):
     def __init__(self, master, directory_list_box: DirectoryListTreeBox, output_panel: OutputPanel, pixel_watcher: PixelWatcher, **kwargs):
@@ -13,26 +14,29 @@ class ControlPanel(customtkinter.CTkFrame):
         self.pixel_watcher.add_callback(self.on_created)  # Register the on_created callback
         self.pixel_monitor = PixelMonitor(self.pixel_watcher)
 
-        self.status_text_var = customtkinter.StringVar(value='Start')
-        self.status_var = customtkinter.BooleanVar()
-        self.start_button = customtkinter.CTkButton(self, textvariable=self.status_text_var, fg_color='green',
-                                                    hover_color='dark green', command=self.toggle)
+        # ToggleButton for Start/Stop functionality
+        self.start_button = ToggleButton(
+            self,
+            text_on="Stop",
+            text_off="Start",
+            colors_on=("red", "darkred"),
+            colors_off=("green", "darkgreen"),
+            hover_colors_on=("darkred", "maroon"),
+            hover_colors_off=("darkgreen", "forestgreen"),
+            command_on=self.start,
+            command_off=self.stop,
+            initial_state=False
+        )
         self.start_button.pack(side='left', padx=(0, 10))
 
+        # Clear button
         self.clear_button = customtkinter.CTkButton(self, text='Clear', command=lambda: self.output_panel.clear())
         self.clear_button.pack()
 
-    def toggle(self):
-        if self.status_var.get():
-            self.stop()
-        else:
-            self.start()
-
     def start(self):
-        self.status_text_var.set('Stop')
-        self.status_var.set(True)
-        self.start_button.configure(fg_color='red', hover_color='dark red')
-
+        """
+        Start monitoring directories.
+        """
         self.output_panel.insert('end', '[Monitoring]:')
         directories_to_monitor = self.directory_list_box.get_directories()
         for directory, data in directories_to_monitor.items():
@@ -44,14 +48,15 @@ class ControlPanel(customtkinter.CTkFrame):
         self.output_panel.insert('end', 'Started.')
 
     def stop(self):
-        self.status_text_var.set('Start')
-        self.status_var.set(False)
-        self.start_button.configure(fg_color='green', hover_color='dark green')
-
+        """
+        Stop monitoring directories.
+        """
         self.output_panel.insert('end', 'Stopped.')
         self.pixel_monitor.stop()
 
     def on_created(self, event):
-        """Callback to handle new directories created."""
+        """
+        Callback to handle new directories created.
+        """
         if event.is_directory:
             self.output_panel.insert('end', f"New directory: {event.src_path}")
