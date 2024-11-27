@@ -6,6 +6,7 @@ from tkinter import messagebox, ttk
 import customtkinter
 
 import constants
+from widgets.buttons.directory_button import DirectoryButton
 from utils.loader import load_image
 from widgets.directory_popup import DirectoryPopup
 
@@ -19,22 +20,19 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         self.directory_buttons_frame = customtkinter.CTkFrame(self, fg_color='transparent')
         self.directory_buttons_frame.pack(fill='x', pady=10)
 
-        self.add_directory_button = customtkinter.CTkButton(
-            self.directory_buttons_frame, text='Add', width=50, fg_color='#636363',
-            hover_color='#3b3b3b', image=load_image('icons/add_folder.png'), command=self.make_directory
-        )
+        self.add_directory_button = DirectoryButton(
+            self.directory_buttons_frame, text='Add', image=load_image('icons/add_folder.png'),
+            command=self.make_directory)
         self.add_directory_button.pack(side='left')
 
-        self.add_default_directories_button = customtkinter.CTkButton(
-            self.directory_buttons_frame, text='Add default directories', width=50, fg_color='#636363',
-            hover_color='#3b3b3b', image=load_image('icons/add_folder.png'), command=self.add_default_directories
-        )
+        self.add_default_directories_button = DirectoryButton(
+            self.directory_buttons_frame, text='Add default directories', image=load_image('icons/add_folder.png'),
+            command=self.add_default_directories)
         self.add_default_directories_button.pack(side='left', padx=(10, 0))
 
-        self.delete_directory_button = customtkinter.CTkButton(
-            self.directory_buttons_frame, text='Delete', width=50, fg_color='#636363', hover_color='#3b3b3b',
-            image=load_image('icons/delete_folder.png'), command=self.delete_directory
-        )
+        self.delete_directory_button = DirectoryButton(
+            self.directory_buttons_frame, text='Delete', image=load_image('icons/delete_folder.png'),
+            command=self.delete_directory)
         self.delete_directory_button.pack(side='left', padx=10)
 
         # Treeview Frame
