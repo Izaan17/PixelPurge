@@ -4,6 +4,7 @@ from tkinter import filedialog
 
 import customtkinter
 
+from widgets.buttons.directory_button import DirectoryButton
 from utils.loader import load_image
 
 
@@ -54,7 +55,7 @@ class DirectoryPopup(customtkinter.CTkToplevel):
 
 
         # Button to open file dialog
-        file_selector_button = customtkinter.CTkButton(
+        file_selector_button = DirectoryButton(
             file_widgets_frame,
             width=10,
             height=10,
@@ -80,18 +81,20 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         button_frame.pack(pady=10, side='bottom')
 
         # Cancel button
-        cancel_button = customtkinter.CTkButton(
+        cancel_button = DirectoryButton(
             button_frame,
             text='Cancel',
-            command=self.destroy
+            command=self.destroy,
+            width=140
         )
         cancel_button.pack(side='left', padx=(5, 20))
 
         # Add button
-        add_button = customtkinter.CTkButton(
+        add_button = DirectoryButton(
             button_frame,
             text='Add',
-            command=self.handle_add
+            command=self.handle_add,
+            width=140
         )
         add_button.pack(side='left', padx=(20, 5))
 
