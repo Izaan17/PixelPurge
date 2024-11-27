@@ -19,9 +19,9 @@ class PixelPurge(customtkinter.CTk):
         # Pixel watcher handles events when new folders are created
         self.pixel_watcher = PixelWatcher()
 
-        # Directories Label
-        self.directories_label = customtkinter.CTkLabel(self, text='Directories to Monitor', font=('', 18, 'bold'))
-        self.directories_label.pack(pady=10)
+        # App Label
+        self.app_label = customtkinter.CTkLabel(self, text='PixelPurge', font=('', 18, 'bold'))
+        self.app_label.pack(pady=10)
 
         self.directory_info_frame = customtkinter.CTkFrame(self)
         self.directory_info_frame.pack(fill='both', expand=True, padx=20)
