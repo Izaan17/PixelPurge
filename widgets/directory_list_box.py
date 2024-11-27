@@ -34,7 +34,9 @@ class DirectoryListBox(customtkinter.CTkFrame):
             command=self.delete)
         self.delete_directory_button.pack(side='left')
 
-        self.list_box = tkinter.Listbox(self, selectmode='multiple')
+        self.list_box = tkinter.Listbox(self, selectmode='multiple', bg='#2b2b2b', fg='white',
+                                   selectbackground='#4f4f4f', selectforeground='white',
+                                   activestyle="none", relief="flat", borderwidth=0)
         self.list_box.pack(fill='both', expand=True)
 
     def select_all(self):
@@ -58,6 +60,7 @@ class DirectoryListBox(customtkinter.CTkFrame):
             except Exception as error:
                 self.output_panel.insert('end', f'Failed to delete "{directory}": {error}')
             self.list_box.delete(selection)
+
     def on_created(self, event):
         if event.is_directory:
             self.list_box.insert('end', f"{event.src_path}")
