@@ -25,12 +25,14 @@ class ControlPanel(customtkinter.CTkFrame):
             hover_colors_off=("darkgreen", "forestgreen"),
             command_on=self.start,
             command_off=self.stop,
-            initial_state=False
+            initial_state=False,
+            corner_radius=5
         )
         self.start_button.pack(side='left', padx=(0, 10))
 
         # Clear button
-        self.clear_button = customtkinter.CTkButton(self, text='Clear', command=lambda: self.output_panel.clear())
+        self.clear_button = customtkinter.CTkButton(self, text='Clear', corner_radius=5, fg_color='#393e46',
+                                                    hover_color='#606470', command=self.output_panel.clear)
         self.clear_button.pack()
 
     def start(self):
@@ -45,13 +47,13 @@ class ControlPanel(customtkinter.CTkFrame):
             self.pixel_monitor.monitor_folder(directory, data['recursive'])
 
         self.pixel_monitor.start()
-        self.output_panel.insert('end', 'Started.')
+        self.output_panel.insert('end', '[STATUS] Started.')
 
     def stop(self):
         """
         Stop monitoring directories.
         """
-        self.output_panel.insert('end', 'Stopped.')
+        self.output_panel.insert('end', '[STATUS] Stopped.')
         self.pixel_monitor.stop()
 
     def on_created(self, event):
