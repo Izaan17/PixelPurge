@@ -1,0 +1,5 @@
+customtkinter==5.2.2
+darkdetect==0.8.0
+packaging==24.2
+pillow==11.0.0
+watchdog==6.0.0
