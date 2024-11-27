@@ -4,6 +4,7 @@ import tkinter.messagebox
 
 import customtkinter
 
+from widgets.buttons.directory_button import DirectoryButton
 from utils.loader import load_image
 from watcher import PixelWatcher
 from widgets.output_panel import OutputPanel
@@ -22,16 +23,15 @@ class DirectoryListBox(customtkinter.CTkFrame):
         self.directory_buttons_frame.pack(fill='x', padx=0, pady=10)
 
         # Select all button
-        self.select_all_button = customtkinter.CTkButton(
-            self.directory_buttons_frame, text='Select All', width=50, fg_color='#636363', hover_color='#3b3b3b',
-            image=load_image('icons/folder.png'), command=self.select_all
-        )
+        self.select_all_button = DirectoryButton(
+            self.directory_buttons_frame, text='Select All', image=load_image('icons/folder.png'),
+            command=self.select_all)
+
         self.select_all_button.pack(side='left', padx=(0, 10))
 
-        self.delete_directory_button = customtkinter.CTkButton(
-            self.directory_buttons_frame, text='Delete', width=50, fg_color='#636363', hover_color='#3b3b3b',
-            image=load_image('icons/delete_folder.png'), command=self.delete
-        )
+        self.delete_directory_button = DirectoryButton(
+            self.directory_buttons_frame, text='Delete', image=load_image('icons/delete_folder.png'),
+            command=self.delete)
         self.delete_directory_button.pack(side='left')
 
         self.list_box = tkinter.Listbox(self, selectmode='multiple')
