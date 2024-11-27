@@ -3,6 +3,4 @@ import os
 HOME_PATH = os.path.expanduser('~')
 PIXEL_PURGE_FOLDER = os.path.join(HOME_PATH, 'PixelPurge')
 PIXEL_PURGE_DIRECTORIES_FILE = os.path.join(PIXEL_PURGE_FOLDER, 'directories.json')
-DEFAULT_DIRECTORIES = [os.path.join(HOME_PATH, 'AppData/Local'),
-                       os.path.join(HOME_PATH, 'AppData/LocalLow'),
-                       os.path.join(HOME_PATH, 'AppData/Roaming')]
+DEFAULT_DIRECTORIES = [os.path.join(HOME_PATH, 'AppData')]
