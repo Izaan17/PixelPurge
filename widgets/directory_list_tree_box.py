@@ -36,8 +36,24 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         self.delete_directory_button.pack(side='left', padx=10)
 
         # Treeview Frame
-        self.tree_frame = customtkinter.CTkFrame(self)
+        self.tree_frame = customtkinter.CTkFrame(self, fg_color='transparent')
         self.tree_frame.pack(fill='both', expand=True)
+
+        # Treeview Style
+        self.style = ttk.Style()
+        self.style.theme_use('clam')
+        self.style.configure('Treeview',
+                             fieldbackground='#2b2b2b',
+                             borderwidth=0,
+                             relief='flat')
+
+        self.style.map('Treeview', background=[('selected', '#4f4f4f')])
+        self.style.configure('Treeview',
+                             rowheight=25,              # Adjust row height
+                             background='#2b2b2b',     # Default row background
+                             foreground='white',       # Text color
+                             fieldbackground='#2b2b2b')  # Cell background
+
 
         # Treeview Widget
         self.tree = ttk.Treeview(self.tree_frame, show='headings')
@@ -74,9 +90,10 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         """
         Adds the given directory to the internal metadata and updates the Treeview.
         """
-        self.directories_metadata[directory] = metadata
-        self.tree.insert('', 'end', text=directory, values=(directory, metadata['recursive']))
-        self.save()
+        if directory not in self.directories_metadata:
+            self.directories_metadata[directory] = metadata
+            self.tree.insert('', 'end', text=directory, values=(directory, metadata['recursive']))
+            self.save()
 
     def add_default_directories(self):
         for directory in constants.DEFAULT_DIRECTORIES:
