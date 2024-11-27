@@ -5,12 +5,13 @@ from tkinter import messagebox, ttk
 import customtkinter
 from utils.loader import load_image
 from widgets.directory_popup import DirectoryPopup
-
+import constants
 
 class DirectoryListTreeBox(customtkinter.CTkFrame):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
         self.directories_metadata = {}  # Stores metadata for each directory
+
 
         # Buttons Frame
         self.directory_buttons_frame = customtkinter.CTkFrame(self, fg_color='transparent')
@@ -117,7 +118,10 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         Saves the current directories and metadata to a JSON file.
         """
         try:
-            with open('directories.json', 'w') as fp:
+            if not os.path.exists(constants.PIXEL_PURGE_FOLDER):
+                os.mkdir(constants.PIXEL_PURGE_FOLDER)
+
+            with open(constants.PIXEL_PURGE_DIRECTORIES_FILE, 'w') as fp:
                 json.dump(self.directories_metadata, fp, indent=4)
         except Exception as e:
             messagebox.showerror('Save Error', f"Error saving data: {e}")
@@ -126,7 +130,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         """
         Loads the directories and metadata from a JSON file.
         """
-        if os.path.exists('directories.json'):
+        if os.path.exists(constants.PIXEL_PURGE_DIRECTORIES_FILE):
             try:
                 with open('directories.json', 'r') as fp:
                     self.directories_metadata = json.load(fp)
