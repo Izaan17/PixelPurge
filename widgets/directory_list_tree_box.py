@@ -132,7 +132,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         """
         if os.path.exists(constants.PIXEL_PURGE_DIRECTORIES_FILE):
             try:
-                with open('directories.json', 'r') as fp:
+                with open(constants.PIXEL_PURGE_DIRECTORIES_FILE, 'r') as fp:
                     self.directories_metadata = json.load(fp)
 
                 # Populate the Treeview with saved data
