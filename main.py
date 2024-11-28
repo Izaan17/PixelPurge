@@ -16,6 +16,8 @@ class PixelPurge(customtkinter.CTk):
         self.title('PixelPurge')
         self.geometry(f'{self.WINDOW_WIDTH}x{self.WINDOW_HEIGHT}')
         self.minsize(self.WINDOW_WIDTH, self.WINDOW_HEIGHT)
+        self.iconbitmap('icons/pixel.ico')
+
         # Pixel watcher handles events when new folders are created
         self.pixel_watcher = PixelWatcher()
 
