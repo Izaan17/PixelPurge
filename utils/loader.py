@@ -1,5 +1,5 @@
-from PIL import Image
 import customtkinter
+from PIL import Image
 
 
 def load_image(path: str, size: tuple[int, int] = (20, 20)):
