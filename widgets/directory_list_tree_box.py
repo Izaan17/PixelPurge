@@ -179,15 +179,22 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         """Loads directory metadata from file."""
         if not os.path.exists(constants.PIXEL_PURGE_DIRECTORIES_FILE):
             return
-
+        invalid_directories = []
         try:
             with open(constants.PIXEL_PURGE_DIRECTORIES_FILE, 'r') as fp:
                 self.directories_metadata = json.load(fp)
 
             for directory, metadata in self.directories_metadata.items():
+                if not os.path.exists(directory):
+                    invalid_directories.append(directory)
+                    continue
                 self.tree.insert('', 'end',
                                  values=(directory, 'Yes' if metadata['recursive'] else 'No'))
-
+            if invalid_directories:
+                tkinter.messagebox.showinfo('Invalid Directories Detected', f'Invalid directories have been detected: {invalid_directories}')
+            for invalid_dir in invalid_directories:
+                del self.directories_metadata[invalid_dir]
+            self.save()
         except Exception as e:
             messagebox.showerror('Error', f'Failed to load directories: {str(e)}')
 
