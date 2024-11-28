@@ -31,8 +31,8 @@ class ControlPanel(customtkinter.CTkFrame):
         self.start_button.pack(side='left', padx=(0, 10))
 
         # Clear button
-        self.clear_button = customtkinter.CTkButton(self, text='Clear', corner_radius=5, fg_color='#393e46',
-                                                    hover_color='#606470', command=self.output_panel.clear)
+        self.clear_button = customtkinter.CTkButton(self, text='Clear', corner_radius=5, fg_color='#606470',
+                                                    hover_color='#393e46', command=self.output_panel.clear)
         self.clear_button.pack()
 
     def start(self):
