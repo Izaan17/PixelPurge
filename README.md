@@ -12,7 +12,7 @@ Please review the files carefully before deleting anything! You are fully respon
 **Use with caution, and back up your files if you’re unsure!**
 
 ## Note
-To make PixelPurge work as intended you must be monitoring before playing the game.
+To make PixelPurge work as intended **you must be monitoring before playing the game**.
 
 
 
