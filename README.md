@@ -16,6 +16,7 @@ Whether you're trying out multiple games or need a quick way to clear out leftov
 ## Why Use PixelPurge?
 
 Testing out games can leave behind unnecessary files in your system, especially in directories like `AppData`. PixelPurge simplifies this cleanup process, allowing you to focus on finding your next favorite game without worrying about leftover clutter.
+Just make sure to click the start button when you are about to play a game.
 
 
 ## Requirements
