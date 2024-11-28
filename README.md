@@ -24,10 +24,34 @@ Testing out games can leave behind unnecessary files in your system, especially 
 ## Requirements
 
 - Python 3.7 or newer
-- Required Python packages:
-    - `watchdog`
-    - `tkinter`
+- Windows/macOS (this application is designed for windows but still works for macOS)
 
 Install the required packages using:
 ```bash
-pip install watchdog
+pip install -r requirements.txt
+```
+
+## Usage
+Windows:
+```bash
+python main.py
+```
+MacOS:
+```bash
+python3 main.py
+```
+
+## Tutorial
+![](ignore/listtree.png)
+
+![](ignore/directories_to_monitor.png)
+
+![](ignore/adding.png)
+
+![](ignore/listbox.png)
+
+![](ignore/listbox_buttons.png)
+
+![](ignore/console.png)
+
+![](ignore/control%20panel.png)
