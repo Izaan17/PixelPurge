@@ -40,15 +40,22 @@ python3 main.py
 
 ## Tutorial
 ![](ignore/listtree.png)
+*This is where all of your directories to monitor are stored.*
 
 ![](ignore/directories_to_monitor.png)
+*You can add and delete directories to monitor. The default directories button inputs the most commonly used folders where games are stored.*
 
 ![](ignore/adding.png)
+*When clicking the add button a popup will appear asking you for the directory path and whether not if it is recursive. The folder button to the right allows for selecting directories via the file system. **(Note: The directory to be added must exist).***
 
 ![](ignore/listbox.png)
+*This list contains all the newly created files that were detected.*
 
 ![](ignore/listbox_buttons.png)
+*The buttons shown allow you to delete them individually or all at once.*
 
 ![](ignore/console.png)
+*This is the console. It has information if any errors come up and or if certain operations were successful or not.*
 
 ![](ignore/control%20panel.png)
+*This is the control panel. The start button starts monitoring the folders for any new additions. The clear button clears the output console.*
