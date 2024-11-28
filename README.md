@@ -5,6 +5,10 @@ PixelPurge is a simple, efficient tool for gamers who love testing new games but
 Whether you're trying out multiple games or need a quick way to clear out leftover files after uninstalling, PixelPurge gives you control over your system's storage without any hassle.
 
 
+## Note
+To make PixelPurge work as intended you must be monitoring before playing the game.
+
+
 ## Features
 
 - **Effortless Game Cleanup**: Easily remove game-created files and directories after trying out games.
