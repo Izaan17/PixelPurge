@@ -1,5 +1,6 @@
 import json
 import os.path
+import tkinter.messagebox
 from tkinter import messagebox, ttk
 
 import customtkinter
@@ -112,7 +113,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
 
     def add_directory(self, directory, metadata):
         """Adds a directory with metadata to the treeview."""
-        if directory in self.directories_metadata:
+        if directory in self.directories_metadata or not os.path.exists(directory):
             return False
 
         self.directories_metadata[directory] = metadata
@@ -140,13 +141,9 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
 
     def add_default_directories(self):
         """Adds predefined default directories."""
-        added = False
         for directory in constants.DEFAULT_DIRECTORIES:
-            if self.add_directory(directory, {'recursive': True}):
-                added = True
-
-        if not added:
-            messagebox.showinfo('Info', 'All default directories already exist')
+            if not self.add_directory(directory, {'recursive': True}):
+                tkinter.messagebox.showerror('Default Directories', f'Failed to add directory: {directory}')
 
     def delete_directory(self):
         """Deletes selected directory entries."""
