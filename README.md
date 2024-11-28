@@ -38,7 +38,7 @@ MacOS:
 python3 main.py
 ```
 
-## Tutorial
+## Getting started
 ![](ignore/listtree.png)
 *This is where all of your directories to monitor are stored.*
 
