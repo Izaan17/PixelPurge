@@ -98,7 +98,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         style.map('Treeview.Heading',
                   background=[('active', colors['selected_bg'])])
 
-    def on_add(self, directory, recursive):
+    def on_add(self, directory, recursive, _):
         """Callback for when a directory is added."""
         if not directory:
             return
@@ -124,23 +124,26 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         self.save()
         return True
 
-    def edit_directory(self, old_directory, directory, metadata):
-        """Updates directory metadata and refreshes display."""
-        if old_directory not in self.directories_metadata:
-            return False
+    def edit_directory(self, directory_path, new_directory, recursive):
+        """Handle editing of a directory entry."""
+        if directory_path in self.directories_metadata:
+            # Remove old entry if path changed
+            if new_directory != directory_path:
+                self.directories_metadata.pop(directory_path)
+                # Update with new directory path
+                self.directories_metadata[new_directory] = {'recursive': recursive}
+            else:
+                # Just update the recursive flag
+                self.directories_metadata[directory_path]['recursive'] = recursive
 
-        self.directories_metadata[directory] = metadata
-        del self.directories_metadata[old_directory]
+            # Update the treeview
+            for item in self.tree.get_children():
+                if self.tree.item(item)['values'][0] == directory_path:
+                    self.tree.item(item, values=(new_directory, 'Yes' if recursive else 'No'))
+                    break
 
-        # Update display
-        for item in self.tree.get_children():
-            if self.tree.item(item)['values'][0] == old_directory:
-                self.tree.item(item,
-                               values=(directory, 'Yes' if metadata['recursive'] else 'No'))
-                break
-
-        self.save()
-        return True
+            # Save changes
+            self.save()
 
     def add_default_directories(self):
         """Adds predefined default directories."""
@@ -222,7 +225,12 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         directory = values[0]
         metadata = self.directories_metadata.get(directory)
         if metadata:
-            DirectoryPopup(self,
-                           on_add_callback=lambda d, r: self.edit_directory(directory, d, {'recursive': r}),
-                           directory=directory,
-                           recursive=metadata['recursive'])
+            # Modified lambda to correctly handle event and pass only necessary arguments
+            DirectoryPopup(
+                self,
+                lambda new_dir, recursive, _: self.edit_directory(directory, new_dir, recursive),
+                directory=directory,
+                recursive=metadata['recursive'],
+                edit_mode=True
+            )
+
