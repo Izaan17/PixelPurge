@@ -119,7 +119,7 @@ class DirectoryListBox(customtkinter.CTkFrame):
                 return True  # Return True to remove from list
 
             shutil.rmtree(directory)
-            self.output_panel.insert('end', f'Successfully deleted: {directory}')
+            self.output_panel.insert('end', f'[ - ] {directory}')
             return True
 
         except PermissionError:
@@ -156,7 +156,6 @@ class DirectoryListBox(customtkinter.CTkFrame):
         existing_items = self.list_box.get(0, tk.END)
         if path not in existing_items:
             self.list_box.insert(tk.END, path)
-            self.output_panel.insert('end', f'Added new directory: {path}')
 
     def clear(self):
         """Clear all items from the listbox."""

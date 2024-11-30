@@ -64,4 +64,4 @@ class ControlPanel(customtkinter.CTkFrame):
         Callback to handle new directories created.
         """
         if event.is_directory:
-            self.output_panel.insert('end', f"New directory: {event.src_path}")
+            self.output_panel.insert('end', f"[ + ] {event.src_path}")
