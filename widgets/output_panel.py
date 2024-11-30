@@ -5,6 +5,7 @@ class OutputPanel(customtkinter.CTkTextbox):
     def __init__(self, master: any, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(state='disabled')
+        self.configure(font=('Consolas', 14))
 
     @staticmethod
     def enable_editing(func):
