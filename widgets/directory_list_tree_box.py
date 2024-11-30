@@ -35,9 +35,11 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
                 self.directory_buttons_frame,
                 text=text,
                 image=load_image(icon),
-                command=command
+                command=command,
             )
             button.pack(side='left', padx=(padx, 0))
+            if text == 'Delete':
+                button.configure(fg_color='#DC2626', hover_color='#B91C1C')
 
         # Treeview Frame
         self.tree_frame = customtkinter.CTkFrame(self, fg_color='transparent')

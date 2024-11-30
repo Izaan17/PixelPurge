@@ -41,6 +41,8 @@ class DirectoryListBox(customtkinter.CTkFrame):
                 command=command
             )
             button.pack(side='left', padx=(padx, 0))
+            if text == 'Delete':
+                button.configure(fg_color='#DC2626', hover_color='#B91C1C')
 
         # Create frame for listbox and scrollbar
         self.list_frame = customtkinter.CTkFrame(self, fg_color='transparent')

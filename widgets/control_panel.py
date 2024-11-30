@@ -7,6 +7,7 @@ from widgets.buttons.toggle_button import ToggleButton
 class ControlPanel(customtkinter.CTkFrame):
     def __init__(self, master, directory_list_box: DirectoryListTreeBox, output_panel: OutputPanel, pixel_watcher: PixelWatcher, **kwargs):
         super().__init__(master, **kwargs)
+        self.configure(fg_color='transparent')
 
         self.directory_list_box = directory_list_box
         self.output_panel = output_panel
@@ -20,19 +21,21 @@ class ControlPanel(customtkinter.CTkFrame):
             text_on="Stop",
             text_off="Start",
             colors_on=("red", "darkred"),
-            colors_off=("green", "darkgreen"),
-            hover_colors_on=("darkred", "maroon"),
-            hover_colors_off=("darkgreen", "forestgreen"),
+            colors_off=("#15A34A", "darkgreen"),
+            hover_colors_on="#B91C1C",
+            hover_colors_off="#15803D",
             command_on=self.start,
             command_off=self.stop,
             initial_state=False,
-            corner_radius=5
+            corner_radius=5,
+            height=35,
         )
         self.start_button.pack(side='left', padx=(0, 10))
 
         # Clear button
-        self.clear_button = customtkinter.CTkButton(self, text='Clear', corner_radius=5, fg_color='#606470',
-                                                    hover_color='#393e46', command=self.output_panel.clear)
+        self.clear_button = customtkinter.CTkButton(self, text='Clear', corner_radius=5, fg_color='#E5E7EB',
+                                                    hover_color='#D1D5DB', command=self.output_panel.clear,
+                                                    text_color='black', height=self.start_button.cget('height'))
         self.clear_button.pack()
 
     def start(self):
