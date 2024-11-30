@@ -24,7 +24,7 @@ class PixelPurge(customtkinter.CTk):
         self.pixel_watcher = PixelWatcher()
 
         self.app_bar = customtkinter.CTkFrame(self, fg_color='transparent')
-        self.app_bar.pack(expand=True, fill='x')
+        self.app_bar.pack(fill='x')
 
         # App Label
         self.app_label = customtkinter.CTkLabel(self.app_bar, text='PixelPurge', font=('', 18, 'bold'),
