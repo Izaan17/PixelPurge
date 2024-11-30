@@ -124,16 +124,17 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         self.save()
         return True
 
-    def edit_directory(self, directory, metadata):
+    def edit_directory(self, old_directory, directory, metadata):
         """Updates directory metadata and refreshes display."""
-        if directory not in self.directories_metadata:
+        if old_directory not in self.directories_metadata:
             return False
 
         self.directories_metadata[directory] = metadata
+        del self.directories_metadata[old_directory]
 
         # Update display
         for item in self.tree.get_children():
-            if self.tree.item(item)['values'][0] == directory:
+            if self.tree.item(item)['values'][0] == old_directory:
                 self.tree.item(item,
                                values=(directory, 'Yes' if metadata['recursive'] else 'No'))
                 break
@@ -222,6 +223,6 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         metadata = self.directories_metadata.get(directory)
         if metadata:
             DirectoryPopup(self,
-                           on_add_callback=lambda d, r: self.edit_directory(d, {'recursive': r}),
+                           on_add_callback=lambda d, r: self.edit_directory(directory, d, {'recursive': r}),
                            directory=directory,
                            recursive=metadata['recursive'])
