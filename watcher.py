@@ -20,20 +20,21 @@ class PixelMonitor:
     def __init__(self, event_handler: FileSystemEventHandler):
         self.event_handler = event_handler
         self.observer = Observer()  # Single observer instance
-        self.monitored_folders = set()  # Track monitored folders to prevent duplication
+        self.monitored_folders = set()  # Track monitored folders
 
     def monitor_folder(self, folder, recursive=True):
         if folder not in self.monitored_folders:
-            # Schedule the folder with the observer
             self.observer.schedule(self.event_handler, folder, recursive=recursive)
             self.monitored_folders.add(folder)
 
     def start(self):
         if not self.observer.is_alive():
-            self.observer.start()
+            self.observer.start()  # Start observer if not already running
 
     def stop(self):
         if self.observer.is_alive():
             self.observer.stop()
-            self.observer.join()  # Wait for the observer thread to terminate
+            self.observer.join()  # Wait for the thread to terminate
+        self.observer = Observer()  # Reinitialize the observer after stopping
         self.monitored_folders.clear()  # Clear the tracked folders
+
