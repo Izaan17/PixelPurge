@@ -41,6 +41,7 @@ class ToggleButton(StateButton):
 
         # Configure the button click behavior
         self.configure(command=self.on_click)
+        self.update_button()
 
     def update_button(self):
         """
