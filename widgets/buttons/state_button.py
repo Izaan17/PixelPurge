@@ -1,6 +1,7 @@
 from typing import Literal
 import customtkinter
 
+
 class StateButton(customtkinter.CTkButton):
     def __init__(self, master: any, initial_state: Literal[0, 1] = 0, **kwargs):
         # Initialize the state (0 or 1)
