@@ -2,6 +2,7 @@ import customtkinter
 
 from utils.loader import load_image
 from watcher import PixelWatcher
+from widgets.buttons.toggle_icon_button import ToggleIconButton
 from widgets.control_panel import ControlPanel
 from widgets.directory_list_box import DirectoryListBox
 from widgets.directory_list_tree_box import DirectoryListTreeBox
@@ -30,18 +31,17 @@ class PixelPurge(customtkinter.CTk):
                                                 text_color=('black', 'white'))
         self.app_label.pack(padx=30, pady=10, side='left')
 
-        current_mode = customtkinter.get_appearance_mode()
-        initial_icon = 'icons/sun.png' if current_mode == 'Dark' else 'icons/moon.png'
-
-        self.toggle_appearance_button = customtkinter.CTkButton(self.app_bar, text='',
+        self.toggle_appearance_button = ToggleIconButton(self.app_bar, text='',
                                                                 command=self.toggle_appearance_mode,
-                                                                corner_radius=10000,
+                                                                corner_radius=20,
                                                                 width=30,
                                                                 fg_color=('#E5E7EB', '#334155'),
                                                                 hover_color=('#D1D5DB', '#475569'),
-                                                                image=load_image(initial_icon))
+                                                                first_image=load_image('icons/sun.png'),
+                                                                second_image=load_image('icons/moon.png'),
+                                                                initial_state=1 if customtkinter.get_appearance_mode() == 'Light' else 0
+                                                         )
         self.toggle_appearance_button.pack(side='right', padx=30)
-
 
         self.directory_info_frame = customtkinter.CTkFrame(self, fg_color=('#F9FAFB', '#1E293B'))
         self.directory_info_frame.pack(fill='both', expand=True, padx=20)
@@ -65,12 +65,11 @@ class PixelPurge(customtkinter.CTk):
         self.controls_panel = ControlPanel(self, self.directory_tree_view, self.output_panel, self.pixel_watcher)
         self.controls_panel.pack(side='left', pady=(0, 10), padx=20)
 
-    def toggle_appearance_mode(self):
+    @staticmethod
+    def toggle_appearance_mode():
         current_mode = customtkinter.get_appearance_mode()
         new_mode = 'Dark' if current_mode == 'Light' else 'Light'
         customtkinter.set_appearance_mode(new_mode)
-        new_image = 'icons/sun.png' if new_mode == 'Dark' else 'icons/moon.png'
-        self.toggle_appearance_button.configure(image=load_image(new_image))
 
 if __name__ == '__main__':
     app = PixelPurge()
