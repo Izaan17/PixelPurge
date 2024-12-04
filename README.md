@@ -32,7 +32,7 @@ Just make sure to click the start button when you are about to play a game.
 
 ## Requirements
 
-- Python 3.7 or newer
+- Python 3.8+
 - Windows/macOS (this application is designed for windows but still works for macOS)
 
 Install the required packages using:
