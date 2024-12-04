@@ -15,7 +15,6 @@ class PixelPurge(customtkinter.CTk):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.title('PixelPurge')
-        self.geometry(f'{self.WINDOW_WIDTH}x{self.WINDOW_HEIGHT}')
         self.minsize(self.WINDOW_WIDTH, self.WINDOW_HEIGHT)
         self.iconbitmap('icons/pixel.ico')
         self.configure(fg_color=('white', '#0d1b2a'))
