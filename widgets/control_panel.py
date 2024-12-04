@@ -26,7 +26,7 @@ class ControlPanel(customtkinter.CTkFrame):
             hover_colors_off="#15803D",
             command_on=self.start,
             command_off=self.stop,
-            initial_state=False,
+            initial_state=0,
             corner_radius=5,
             height=35,
         )
