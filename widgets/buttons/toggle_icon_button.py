@@ -1,7 +1,11 @@
 from typing import Literal
+
 import customtkinter
 
-class ToggleIconButton(customtkinter.CTkButton):
+from widgets.buttons.state_button import StateButton
+
+
+class ToggleIconButton(StateButton):
     def __init__(self,
                  master: any,
                  command: callable,
@@ -10,38 +14,37 @@ class ToggleIconButton(customtkinter.CTkButton):
                  initial_state: Literal[0, 1] = 0,
                  **kwargs):
 
-        # Set initial image based on initial_state
+        # Initialize the StateButton part of the class
         initial_image = first_image if initial_state == 0 else second_image
-        super().__init__(master, image=initial_image, **kwargs)
+        super().__init__(master, initial_state=initial_state, image=initial_image, **kwargs)
 
+        # Set the images based on the state
         self.command = command
-        self.current_state = initial_state
         self.first_image = first_image
         self.second_image = second_image
-        self.current_image = initial_image
 
+        # Configure the button click behavior
         self.configure(command=self.on_click)
 
     def on_click(self):
-        # Run the command when the button is clicked
+        """Handle button click."""
+        # Execute the provided command
         self.command()
 
-        # Toggle the state and image
+        # Toggle the state and update the image
         self.toggle_state()
 
         # Update the button's image after toggling
-        self.configure(image=self.current_image)
+        self.update_image()
 
     def toggle_state(self):
-        """Toggle between first and second image."""
-        # Toggle the current state
-        self.set_state(1 - self.current_state)
+        """Override the toggle function to update the state and image."""
+        # Toggle the current state (using StateButton's toggle method)
+        self.toggle()
 
-    def set_state(self, state: int):
-        """Set the state and image directly."""
-        if state == 0:
-            self.current_image = self.first_image
+    def update_image(self):
+        """Update the button's image based on the current state."""
+        if self.get_state() == 0:
+            self.configure(image=self.first_image)
         else:
-            self.current_image = self.second_image
-        self.current_state = state
-        self.configure(image=self.current_image)
+            self.configure(image=self.second_image)
