@@ -6,6 +6,7 @@ import customtkinter
 
 from widgets.buttons.directory_button import DirectoryButton
 from utils.loader import load_image
+from widgets.checkboxes.check_box import DefaultCheckBox
 
 
 class DirectoryPopup(customtkinter.CTkToplevel):
@@ -99,10 +100,11 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         options_frame.pack(fill="x", pady=20)
 
         # Checkbox for recursive option
-        self.recursive_checkbox = customtkinter.CTkCheckBox(
+        self.recursive_checkbox = DefaultCheckBox(
             options_frame,
             text="Include subdirectories (recursive)",
-            variable=self.recursive_var
+            variable=self.recursive_var,
+            corner_radius=6
         )
         self.recursive_checkbox.pack(anchor="w")
 
