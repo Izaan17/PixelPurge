@@ -87,8 +87,8 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         # Button to open file dialog
         file_selector_button = DirectoryButton(
             selection_frame,
-            width=40,
-            height=40,
+            width=30,
+            height=30,
             text="",
             command=self.open_directory_selector,
             image=load_image("icons/folder.png", (20, 20))
