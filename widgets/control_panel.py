@@ -20,7 +20,7 @@ class ControlPanel(customtkinter.CTkFrame):
             self,
             text_on="Stop",
             text_off="Start",
-            colors_on=("red", "darkred"),
+            colors_on=("red", "red"),
             colors_off=("#15A34A", "darkgreen"),
             hover_colors_on="#B91C1C",
             hover_colors_off="#15803D",
