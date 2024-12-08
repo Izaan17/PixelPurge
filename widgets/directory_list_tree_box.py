@@ -205,7 +205,8 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
                 self.tree.insert('', 'end',
                                  values=(directory, 'Yes' if metadata['recursive'] else 'No'))
             if invalid_directories:
-                tkinter.messagebox.showinfo('Invalid Directories Detected', f'Invalid directories have been detected: {invalid_directories}')
+                tkinter.messagebox.showinfo('Invalid Directories Detected',
+                                            f'Invalid directories have been detected: {invalid_directories}')
             for invalid_dir in invalid_directories:
                 del self.directories_metadata[invalid_dir]
             self.save()
@@ -241,4 +242,3 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
                 recursive=metadata['recursive'],
                 edit_mode=True
             )
-

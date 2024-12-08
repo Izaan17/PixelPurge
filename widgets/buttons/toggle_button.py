@@ -1,4 +1,5 @@
 from typing import Literal, Optional, Tuple, Callable, Union
+
 import customtkinter
 
 from widgets.buttons.state_button import StateButton

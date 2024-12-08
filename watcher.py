@@ -37,4 +37,3 @@ class PixelMonitor:
             self.observer.join()  # Wait for the thread to terminate
         self.observer = Observer()  # Reinitialize the observer after stopping
         self.monitored_folders.clear()  # Clear the tracked folders
-

@@ -1,11 +1,14 @@
 import customtkinter
+
 from watcher import PixelMonitor, PixelWatcher
+from widgets.buttons.toggle_button import ToggleButton
 from widgets.directory_list_tree_box import DirectoryListTreeBox
 from widgets.output_panel import OutputPanel
-from widgets.buttons.toggle_button import ToggleButton
+
 
 class ControlPanel(customtkinter.CTkFrame):
-    def __init__(self, master, directory_list_box: DirectoryListTreeBox, output_panel: OutputPanel, pixel_watcher: PixelWatcher, **kwargs):
+    def __init__(self, master, directory_list_box: DirectoryListTreeBox, output_panel: OutputPanel,
+                 pixel_watcher: PixelWatcher, **kwargs):
         super().__init__(master, **kwargs)
         self.configure(fg_color='transparent')
 

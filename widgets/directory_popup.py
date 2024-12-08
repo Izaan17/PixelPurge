@@ -4,8 +4,8 @@ from tkinter import filedialog
 
 import customtkinter
 
-from widgets.buttons.directory_button import DirectoryButton
 from utils.loader import load_image
+from widgets.buttons.directory_button import DirectoryButton
 from widgets.checkboxes.check_box import DefaultCheckBox
 
 

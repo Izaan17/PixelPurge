@@ -1,5 +1,7 @@
-import customtkinter
 from functools import wraps
+
+import customtkinter
+
 
 class OutputPanel(customtkinter.CTkTextbox):
     def __init__(self, master: any, **kwargs):
@@ -13,6 +15,7 @@ class OutputPanel(customtkinter.CTkTextbox):
         Decorator that temporarily enables editing for a method call.
         Automatically disables editing after the method completes.
         """
+
         @wraps(func)
         def wrapper(self, *args, **kwargs):
             self.configure(state='normal')
@@ -21,6 +24,7 @@ class OutputPanel(customtkinter.CTkTextbox):
                 return result
             finally:
                 self.configure(state='disabled')
+
         return wrapper
 
     @enable_editing

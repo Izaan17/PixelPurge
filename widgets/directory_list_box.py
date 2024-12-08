@@ -69,7 +69,6 @@ class DirectoryListBox(customtkinter.CTkFrame):
         self.list_box.bind('<Delete>', lambda e: self.delete())
         self.list_box.bind('<Control-a>', self.select_all_shortcut)
 
-
     def select_all(self):
         """Select all items in the listbox."""
         self.list_box.selection_clear(0, tk.END)

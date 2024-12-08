@@ -1,5 +1,6 @@
 import customtkinter
 
+
 class DefaultCheckBox(customtkinter.CTkCheckBox):
     def __init__(self, master: any, **kwargs):
         super().__init__(master, **kwargs)
