@@ -103,7 +103,7 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         if not directory:
             return
 
-        directory = directory.rstrip('/')
+        directory = directory.rstrip(os.sep)
 
         if directory in self.directories_metadata:
             messagebox.showerror('Error', 'Directory already exists')
@@ -128,24 +128,30 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
 
     def edit_directory(self, directory_path, new_directory, recursive):
         """Handle editing of a directory entry."""
-        if directory_path in self.directories_metadata:
-            # Remove old entry if path changed
-            if new_directory != directory_path:
-                self.directories_metadata.pop(directory_path)
-                # Update with new directory path
-                self.directories_metadata[new_directory] = {'recursive': recursive}
-            else:
-                # Just update the recursive flag
-                self.directories_metadata[directory_path]['recursive'] = recursive
+        new_directory = new_directory.rstrip(os.sep)
+        # Ensure the new directory doesn't already exist unless it's the same as the current directory
+        if new_directory in self.directories_metadata and new_directory != directory_path:
+            messagebox.showerror('Error', 'The directory already exists.')
+            return False
 
-            # Update the treeview
-            for item in self.tree.get_children():
-                if self.tree.item(item)['values'][0] == directory_path:
-                    self.tree.item(item, values=(new_directory, 'Yes' if recursive else 'No'))
-                    break
+        # Remove old entry if path changed
+        if new_directory != directory_path:
+            self.directories_metadata.pop(directory_path)
+            # Update with new directory path
+            self.directories_metadata[new_directory] = {'recursive': recursive}
+        else:
+            # Just update the recursive flag
+            self.directories_metadata[directory_path]['recursive'] = recursive
 
-            # Save changes
-            self.save()
+        # Update the treeview
+        for item in self.tree.get_children():
+            if self.tree.item(item)['values'][0] == directory_path:
+                self.tree.item(item, values=(new_directory, 'Yes' if recursive else 'No'))
+                break
+
+        # Save changes
+        self.save()
+        return True
 
     def add_default_directories(self):
         """Adds predefined default directories."""
