@@ -20,7 +20,7 @@ class DirectoryPopup(customtkinter.CTkToplevel):
 
         Args:
             parent: The parent window.
-            on_submit_callback: Callback to invoke when the "Add" or "Save" button is pressed.
+            on_submit_callback: Callback to invoke when the "Add" or "Save" button is pressed. Passes 3 parameters: directory, recursive, and edit mode status
             directory: The directory to pre-populate if editing (default is None).
             recursive: The recursive state to pre-populate if editing (default is False).
             edit_mode: Boolean indicating if we're editing an existing directory.
@@ -143,7 +143,8 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         if selected_directory:
             self.directory_var.set(selected_directory)
 
-    def validate_directory(self, directory):
+    @staticmethod
+    def validate_directory(directory):
         """
         Validates the selected directory.
 
