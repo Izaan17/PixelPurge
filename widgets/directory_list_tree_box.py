@@ -98,10 +98,12 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
         style.map('Treeview.Heading',
                   background=[('active', colors['selected_bg'])])
 
-    def on_add(self, directory, recursive, _):
+    def on_add(self, directory: str, recursive: bool, _):
         """Callback for when a directory is added."""
         if not directory:
             return
+
+        directory = directory.rstrip('/')
 
         if directory in self.directories_metadata:
             messagebox.showerror('Error', 'Directory already exists')
