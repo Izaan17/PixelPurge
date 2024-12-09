@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 import customtkinter
 
-from utils.loader import load_image
+from utils.loader import load_icon
 from watcher import PixelWatcher
 from widgets.buttons.directory_button import DirectoryButton
 from widgets.output_panel import OutputPanel
@@ -29,15 +29,15 @@ class DirectoryListBox(customtkinter.CTkFrame):
 
         # Create buttons
         buttons_config = [
-            ('Select All', 'icons/folder.png', self.select_all, 0),
-            ('Delete', 'icons/delete_folder.png', self.delete, 10)
+            ('Select All', 'folder.png', self.select_all, 0),
+            ('Delete', 'delete_folder.png', self.delete, 10)
         ]
 
         for text, icon, command, padx in buttons_config:
             button = DirectoryButton(
                 self.directory_buttons_frame,
                 text=text,
-                image=load_image(icon),
+                image=load_icon(icon),
                 command=command
             )
             button.pack(side='left', padx=(padx, 0))

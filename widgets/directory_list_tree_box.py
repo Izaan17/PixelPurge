@@ -6,7 +6,7 @@ from tkinter import messagebox, ttk
 import customtkinter
 
 import constants
-from utils.loader import load_image
+from utils.loader import load_icon
 from widgets.buttons.directory_button import DirectoryButton
 from widgets.directory_popup import DirectoryPopup
 
@@ -25,16 +25,16 @@ class DirectoryListTreeBox(customtkinter.CTkFrame):
 
         # Create buttons with consistent spacing
         buttons_config = [
-            ('Add', 'icons/add_folder.png', self.make_directory, 0),
-            ('Add default directories', 'icons/add_folder.png', self.add_default_directories, 10),
-            ('Delete', 'icons/delete_folder.png', self.delete_directory, 10)
+            ('Add', 'add_folder.png', self.make_directory, 0),
+            ('Add default directories', 'add_folder.png', self.add_default_directories, 10),
+            ('Delete', 'delete_folder.png', self.delete_directory, 10)
         ]
 
         for text, icon, command, padx in buttons_config:
             button = DirectoryButton(
                 self.directory_buttons_frame,
                 text=text,
-                image=load_image(icon),
+                image=load_icon(icon),
                 command=command,
             )
             button.pack(side='left', padx=(padx, 0))

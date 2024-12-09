@@ -4,7 +4,7 @@ from tkinter import filedialog
 
 import customtkinter
 
-from utils.loader import load_image
+from utils.loader import load_icon
 from widgets.buttons.directory_button import DirectoryButton
 from widgets.checkboxes.check_box import DefaultCheckBox
 
@@ -91,7 +91,7 @@ class DirectoryPopup(customtkinter.CTkToplevel):
             height=30,
             text="",
             command=self.open_directory_selector,
-            image=load_image("icons/folder.png", (20, 20))
+            image=load_icon("folder.png", (20, 20))
         )
         file_selector_button.pack(side="right")
 

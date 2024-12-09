@@ -1,6 +1,6 @@
 import customtkinter
 
-from utils.loader import load_image
+from utils.loader import load_icon
 from watcher import PixelWatcher
 from widgets.buttons.toggle_button import ToggleButton
 from widgets.control_panel import ControlPanel
@@ -37,8 +37,8 @@ class PixelPurge(customtkinter.CTk):
                                                      width=30,
                                                      fg_color=('#E5E7EB', '#334155'),
                                                      hover_color=('#D1D5DB', '#475569'),
-                                                     first_image=load_image('icons/sun.png'),
-                                                     second_image=load_image('icons/moon.png'),
+                                                     first_image=load_icon('sun.png'),
+                                                     second_image=load_icon('moon.png'),
                                                      initial_state=1 if customtkinter.get_appearance_mode() == 'Light' else 0
                                                      )
         self.toggle_appearance_button.pack(side='right', padx=30)
