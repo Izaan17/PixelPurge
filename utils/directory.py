@@ -11,5 +11,3 @@ def get_app_dir():
 
 def get_icon_dir():
     return get_project_root() / 'icons'
-
-print(get_project_root())
