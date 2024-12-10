@@ -44,19 +44,8 @@ class DirectoryPopup(customtkinter.CTkToplevel):
         # Create UI Components
         self.create_widgets()
 
-        # Center the popup
-        self.center_window()
-
         # Bind escape key to close
         self.bind("<Escape>", lambda e: self.destroy())
-
-    def center_window(self):
-        """Centers the popup window relative to its parent."""
-        self.update_idletasks()
-        parent = self.master
-        x = parent.winfo_x() + (parent.winfo_width() // 2) - (self.winfo_width() // 2)
-        y = parent.winfo_y() + (parent.winfo_height() // 2) - (self.winfo_height() // 2)
-        self.geometry(f"+{x}+{y}")
 
     def create_widgets(self):
         """Creates the widgets for the popup with improved layout and feedback."""
